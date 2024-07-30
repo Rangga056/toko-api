@@ -27,7 +27,7 @@ class Database extends Config
     public array $default = [
         'DSN' => '',
         'hostname' => 'localhost',
-        'username' => 'muhammadrangga056',
+        'username' => 'root',
         'password' => '',
         'database' => 'toko_api',
         'DBDriver' => 'MySQLi',

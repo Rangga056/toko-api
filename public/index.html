@@ -3,9 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Fetch and Display Data</title>
+    <style>
+      .product {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      .product h2 {
+        margin: 0;
+        font-size: 1.5em;
+      }
+    </style>
   </head>
   <body>
-    Hello
+    <div id="product-list"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Function to fetch and display data
+        function fetchAndDisplayData() {
+          fetch("http://localhost/toko-api/public/produk")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // Get the container element
+              const productList = document.getElementById("product-list");
+
+              // Clear the container
+              productList.innerHTML = "";
+
+              // Check if data is an array
+              if (Array.isArray(data)) {
+                data.forEach((product) => {
+                  // Create a new product element
+                  const productElement = document.createElement("div");
+                  productElement.classList.add("product");
+
+                  // Populate the product element with data
+                  productElement.innerHTML = `
+                                    <h2>${product.nama_produk}</h2>
+                                    <p>Kode Produk: ${product.kode_produk}</p>
+                                    <p>Harga: ${product.harga.toLocaleString(
+                                      "id-ID",
+                                      { style: "currency", currency: "IDR" }
+                                    )}</p>
+                                `;
+
+                  // Append the product element to the container
+                  productList.appendChild(productElement);
+                });
+              } else {
+                productList.innerHTML = "<p>No products found.</p>";
+              }
+            })
+            .catch((error) => {
+              console.error(
+                "There was a problem with the fetch operation:",
+                error
+              );
+              document.getElementById(
+                "product-list"
+              ).innerHTML = `<p>Failed to load data. ${error}</p>`;
+            });
+        }
+
+        // Fetch and display data on page load
+        fetchAndDisplayData();
+      });
+    </script>
   </body>
 </html>
