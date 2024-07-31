@@ -6,4 +6,5 @@ use CodeIgniter\Model;
 class MMember extends Model
 {
   protected $table = "member";
+  protected $allowedFields = ['nama', 'email', 'password'];
 }

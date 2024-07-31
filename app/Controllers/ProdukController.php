@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\MProduk;
+use CodeIgniter\RESTful\ResourceController;
 
-class ProdukController extends RestfulController
+class ProdukController extends ResourceController
 {
   public function create()
   {
@@ -55,5 +56,14 @@ class ProdukController extends RestfulController
     $produk = $model->delete($id);
 
     return $this->responseHasil(200, true, $produk);
+  }
+
+  protected function responseHasil($code, $status, $data)
+  {
+    return $this->respond([
+      'code' => $code,
+      'status' => $status,
+      'data' => $data
+    ]);
   }
 }

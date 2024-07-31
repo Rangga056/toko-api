@@ -26,7 +26,7 @@
 
 #--------------------------------------------------------------------
 
-# CI_ENVIRONMENT =
+CI_ENVIRONMENT = development
 
 #--------------------------------------------------------------------
 
@@ -50,13 +50,13 @@
 
 #--------------------------------------------------------------------
 
-database.default.hostname = localhost
+# database.default.hostname = localhost
 
 # database.default.database = ci4
 
-database.default.username = root
+# database.default.username = root
 
-database.default.password =
+# database.default.password =
 
 database.default.DBDriver = MySQLi
 

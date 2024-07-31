@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use App\Models\MLogin;
 use App\Models\MMember;
+use CodeIgniter\RESTful\ResourceController;
 
-class LoginController extends RestfulController
+class LoginController extends ResourceController
 {
 
   public function login()
@@ -47,5 +48,14 @@ class LoginController extends RestfulController
       $str .= $karakkter[rand(0, $panjang_karakter - 1)];
     }
     return $str;
+  }
+
+  protected function responseHasil($code, $status, $data)
+  {
+    return $this->respond([
+      'code' => $code,
+      'status' => $status,
+      'data' => $data
+    ]);
   }
 }
